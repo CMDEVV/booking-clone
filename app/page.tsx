@@ -1,3 +1,4 @@
+import SearchForm from "@/components/SearchForm";
 import { trending_data } from "@/data/trending";
 
 export default function Home() {
@@ -12,8 +13,9 @@ export default function Home() {
       </section>
 
       {/* negative margin to give us that overlaping form */}
-      <section className="m-4 mt-0 -mb-14 px-2 lg:px-4">
+      <section className="m-4 mt-0 -mb-14 px-2 lg:px-4 bg-red">
         {/* Search Form */}
+        <SearchForm />
       </section>
 
       {/* Dummy Data */}
