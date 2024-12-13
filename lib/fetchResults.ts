@@ -15,18 +15,19 @@ export async function fetchResults(searchParams: SearchParams) {
     }
   });
 
+  console.log("scraping url>>>>", url.href);
   const body = {
     source: "universal",
-    ulr: url.href,
+    url: url.href,
     parse: true,
     render: "html",
     parsing_instructions: {
       // A way to tell oxylab to scrap data from website
-      listings: {
+      results: {
         _fns: [
           {
-            _fn: "xpath_one",
-            _args: ["//div[@date-testid='property-card-container'"],
+            _fn: "xpath",
+            _args: ["//div[@data-testid='property-card-container']"],
           },
         ],
         _items: {
@@ -88,7 +89,14 @@ export async function fetchResults(searchParams: SearchParams) {
               },
             ],
           },
-
+          rating: {
+            _fns: [
+              {
+                _fn: "xpath_one",
+                _args: [".//div[@class='a3b8729ab1 d86cee9b25']/text()"],
+              },
+            ],
+          },
           rating_count: {
             _fns: [
               {
@@ -127,7 +135,10 @@ export async function fetchResults(searchParams: SearchParams) {
     .then((response) => response.json())
     .then((data) => {
       if (data.results.length === 0) return;
+      // if (!data.result.length)
       const result: Result = data.results[0];
+
+      console.log("Results_from_reponse", result.content);
       return result;
     })
     .catch((err) => console.log(err));
