@@ -23,7 +23,8 @@ export async function fetchResults(searchParams: SearchParams) {
     render: "html",
     parsing_instructions: {
       // A way to tell oxylab to scrap data from website
-      results: {
+      //   results: {
+      listings: {
         _fns: [
           {
             _fn: "xpath",
@@ -138,7 +139,7 @@ export async function fetchResults(searchParams: SearchParams) {
       // if (!data.result.length)
       const result: Result = data.results[0];
 
-      console.log("Results_from_reponse", result.content);
+      console.log("Results_from_reponse", result.content.listings);
       return result;
     })
     .catch((err) => console.log(err));

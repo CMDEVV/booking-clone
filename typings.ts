@@ -12,7 +12,7 @@ export type Listing = {
 
 export type Result = {
   content: {
-    results: Listing[];
+    listings: Listing[];
     total_listings: string;
   };
 };
