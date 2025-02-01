@@ -15,14 +15,14 @@ export async function fetchResults(searchParams: SearchParams) {
     }
   });
 
-  console.log("scraping url>>>>", url.href);
+  // console.log("scraping url>>>>", url.href);
   const body = {
     source: "universal",
     url: url.href,
     parse: true,
     render: "html",
     parsing_instructions: {
-      // A way to tell oxylab to scrap data from website
+      // scrap data from website
       //   results: {
       listings: {
         _fns: [
@@ -125,7 +125,7 @@ export async function fetchResults(searchParams: SearchParams) {
     method: "POST",
     body: JSON.stringify(body),
     next: {
-      revalidate: 60 * 60, // every hour, it caches it. so when the user refreshes the screen it doesn't keep hitting the api.
+      revalidate: 60 * 60,
     },
     headers: {
       "Content-Type": "application/json",
@@ -139,7 +139,7 @@ export async function fetchResults(searchParams: SearchParams) {
       // if (!data.result.length)
       const result: Result = data.results[0];
 
-      console.log("Results_from_reponse", result.content.listings);
+      // console.log("Results_from_reponse", result.content.listings);
       return result;
     })
     .catch((err) => console.log(err));
